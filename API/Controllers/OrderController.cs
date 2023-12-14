@@ -1,4 +1,3 @@
-using AutoMapper;
 using Domain.Models;
 using Domain.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -11,15 +10,12 @@ namespace API.Controllers
     {
         private readonly ILogger<OrderController> _logger;
         private readonly IOrderService _orderService;
-        private readonly IMapper _mapper;
 
         public OrderController(ILogger<OrderController> logger, 
-            IOrderService orderService, 
-            IMapper mapper)
+            IOrderService orderService)
         {
             _logger = logger;
             _orderService = orderService;
-            _mapper = mapper;
         }
 
         [HttpPost]

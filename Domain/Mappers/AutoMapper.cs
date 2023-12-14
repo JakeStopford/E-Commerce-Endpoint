@@ -2,7 +2,7 @@
 using Data.Entities;
 using Domain.Models;
 
-namespace API.Mappers
+namespace Domain.Mappers
 {
     public class AutoMapper : Profile
     {
@@ -10,6 +10,7 @@ namespace API.Mappers
         {
             CreateMap<OrderToSaveDto, OrderDto>();
             CreateMap<Address, ShippingAddressEntity>();
+            CreateMap<Product, ProductEntity>();
         }
     }
 }

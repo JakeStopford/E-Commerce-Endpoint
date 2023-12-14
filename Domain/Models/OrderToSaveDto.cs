@@ -9,5 +9,4 @@ public class OrderToSaveDto
     public string CustomerEmail { get; set; }
     public Address ShippingAddress { get; set;  }
     public IEnumerable<Product> Products { get; set; }
-    public DateTime OrderDate { get; set; }
 }

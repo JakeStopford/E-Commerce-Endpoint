@@ -29,31 +29,21 @@ namespace Domain.Services
                 var customer = await _repository.GetCustomerByEmailAsync(order.CustomerEmail);
                 if (customer == null)
                 {
-                    customer = new CustomerEntity
-                    {
-                        Email = order.CustomerEmail
-                    };
+                    customer = MapCustomer(order.CustomerEmail);
                     await _repository.AddCustomerAsync(customer);
                 }
 
                 var shippingAddress = await _repository.GetShippingAddressAsync(_mapper.Map<ShippingAddressEntity>(order.ShippingAddress));
                 if (shippingAddress == null)
                 {
-                    shippingAddress = new ShippingAddressEntity
-                    {
-                        AddressLine1 = order.ShippingAddress.AddressLine1,
-                        AddressLine2 = order.ShippingAddress.AddressLine2,
-                        City = order.ShippingAddress.City,
-                        Country = order.ShippingAddress.Country,
-                        PostCode = order.ShippingAddress.PostCode
-                    };
+                    shippingAddress = MapShippingAddress(order.ShippingAddress);
                     await _repository.AddShippingAddressAsync(shippingAddress);
                 }
 
                 var orderEntity = new OrderEntity
                 {
                     Customer = customer,
-                    OrderDate = order.OrderDate,
+                    OrderDate = DateTime.Now,
                     ShippingAddress = shippingAddress
                 };
 
@@ -77,6 +67,26 @@ namespace Domain.Services
                 Console.WriteLine($"Error saving order: {ex.Message}");
                 throw;
             }
+        }
+
+        private static CustomerEntity MapCustomer(string email)
+        {
+            return new CustomerEntity
+            {
+                Email = email
+            };
+        }
+
+        private static ShippingAddressEntity MapShippingAddress(Address address)
+        {
+            return new ShippingAddressEntity
+            {
+                AddressLine1 = address.AddressLine1,
+                AddressLine2 = address.AddressLine2,
+                City = address.City,
+                Country = address.Country,
+                PostCode = address.PostCode
+            };
         }
     }
 }

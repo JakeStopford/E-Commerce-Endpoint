@@ -47,6 +47,12 @@ namespace Data.Repositories
             return await _context.SaveChangesAsync();
         }
 
+        public async Task<bool> CheckIfProductsExist(List<ProductEntity> products)
+        {
+            var productIds = products.Select(p => p.Id);
+            return await _context.Products.AnyAsync(x => productIds.Contains(x.Id));
+        }
+
         public async Task<int> SaveChangesAsync()
         {
             return await _context.SaveChangesAsync();

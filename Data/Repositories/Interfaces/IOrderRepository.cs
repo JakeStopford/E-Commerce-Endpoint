@@ -9,5 +9,6 @@ public interface IOrderRepository
     Task<int> AddCustomerAsync(CustomerEntity customer);
     Task<int> AddShippingAddressAsync(ShippingAddressEntity? shippingAddress);
     Task<int> AddOrderAsync(OrderEntity order);
+    Task<bool> CheckIfProductsExist(List<ProductEntity> products);
     Task<int> SaveChangesAsync();
 }

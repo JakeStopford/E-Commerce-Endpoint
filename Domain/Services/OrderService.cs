@@ -24,6 +24,16 @@ namespace Domain.Services
                 throw new ArgumentException("Invalid order data. Customer email, shipping address, and products are required.");
             }
 
+            var productEntities = order.Products.Select(product => new ProductEntity
+            {
+                Id = product.ProductId,
+            }).ToList();
+
+            if (!await _repository.CheckIfProductsExist(productEntities))
+            {
+                throw new ArgumentException("Invalid proudct information.");
+            }
+
             try
             {
                 var customer = await _repository.GetCustomerByEmailAsync(order.CustomerEmail);

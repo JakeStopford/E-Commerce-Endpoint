@@ -52,6 +52,6 @@ namespace Data.Context
         public DbSet<ProductOrderEntity> ProductOrders { get; set; }
         public DbSet<ProductEntity> Products { get; set; }
         public DbSet<CustomerEntity> Customers { get; set; }
-        public DbSet<ShippingAddressEntity?> ShippingAddresses { get; set; }
+        public DbSet<ShippingAddressEntity> ShippingAddresses { get; set; }
     }
 }

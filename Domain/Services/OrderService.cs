@@ -28,7 +28,7 @@ namespace Domain.Services
 
             if (!await _repository.CheckIfProductsExist(productEntities))
             {
-                throw new ArgumentException("Invalid proudct information.");
+                throw new ArgumentException("Invalid product information.");
             }
 
             try

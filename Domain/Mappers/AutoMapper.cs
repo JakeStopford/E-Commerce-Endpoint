@@ -8,9 +8,7 @@ namespace Domain.Mappers
     {
         public AutoMapper()
         {
-            CreateMap<OrderToSaveDto, OrderDto>();
             CreateMap<Address, ShippingAddressEntity>();
-            CreateMap<Product, ProductEntity>();
         }
     }
 }

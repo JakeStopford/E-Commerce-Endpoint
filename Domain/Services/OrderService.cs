@@ -31,6 +31,8 @@ namespace Domain.Services
                 throw new ArgumentException("Invalid product information.");
             }
 
+            await using var transaction = await _repository.BeginTransactionAsync();
+
             try
             {
                 var customer = await _repository.GetCustomerByEmailAsync(order.CustomerEmail);
@@ -66,12 +68,14 @@ namespace Domain.Services
 
                 await _repository.AddOrderAsync(orderEntity);
                 await _repository.SaveChangesAsync();
+                await transaction.CommitAsync();
 
                 return orderEntity.Id;
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error saving order: {ex.Message}");
+                await transaction.RollbackAsync();
                 throw;
             }
         }

@@ -10,9 +10,7 @@ namespace Domain.Mappers
         {
             CreateMap<Address, ShippingAddressEntity>();
             CreateMap<Product, ProductEntity>()
-                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.ProductId))
-                .ForMember(dest => dest.Name, opt => opt.Ignore())
-                .ForMember(dest => dest.Price, opt => opt.Ignore());
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.ProductId));
         }
     }
 }
